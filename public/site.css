@@ -1,0 +1,100 @@
+:root {
+  /* fundo branco e só tema claro: o ipê amarelo é a cor da página */
+  color-scheme: light;
+  --fundo: #ffffff; --tinta: #1f2a1a; --suave: #657060; --linha: #ebe8df;
+  --cartao: #ffffff; --ipe: #e8b417; --folha: #3f6b3a; --vidro: rgba(255, 255, 255, .82);
+}
+* { box-sizing: border-box; }
+html { background: var(--fundo); }
+body {
+  margin: 0; color: var(--tinta); background: transparent; overflow-x: hidden;
+  font: 17px/1.6 Georgia, "Iowan Old Style", "Times New Roman", serif;
+  min-height: 100vh; display: flex; flex-direction: column;
+}
+a { color: var(--folha); }
+
+/* o ipê 3D: fixo atrás de tudo; sem WebGL simplesmente não aparece */
+.cena-fundo { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; display: block; }
+.topo, main, .rodape { position: relative; z-index: 1; }
+main { flex: 1; }
+
+.topo { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px clamp(16px, 5vw, 64px);
+  font-family: system-ui, sans-serif; font-size: 15px; }
+.marca { color: var(--tinta); text-decoration: none; font-weight: 700; }
+.flor { color: var(--ipe); }
+.local { color: var(--suave); }
+
+/* texto à esquerda nas telas largas: a árvore fica visível à direita */
+.coluna { width: min(640px, 100% - 32px); margin: 0 auto; padding: 24px 0 56px; }
+@media (min-width: 1100px) { .coluna { margin-left: clamp(32px, 8vw, 140px); } }
+
+.hero { min-height: min(78vh, 720px); display: flex; align-items: center; padding: 0 clamp(16px, 8vw, 140px); }
+.hero-texto { max-width: 600px; }
+.selo { display: inline-block; margin: 0 0 16px; padding: 5px 12px; border-radius: 99px; font: 600 13px system-ui, sans-serif;
+  color: var(--folha); background: color-mix(in srgb, var(--ipe) 18%, var(--cartao)); border: 1px solid color-mix(in srgb, var(--ipe) 45%, transparent); }
+.titulo { font-size: clamp(36px, 6.2vw, 72px); line-height: 1.02; letter-spacing: -0.025em; margin: 0 0 18px; }
+.mascara { display: inline-block; overflow: clip; overflow-clip-margin: .12em; vertical-align: top; padding-bottom: .06em; }
+.palavra { display: inline-block; }
+.sub { font-size: 19px; color: var(--suave); margin: 0 0 26px; max-width: 32em; }
+.hero-acoes { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; font-family: system-ui, sans-serif; }
+.botao { background: var(--folha); color: #fff; text-decoration: none; font-weight: 600; padding: 12px 22px; border-radius: 99px; transition: transform .2s, background .2s; }
+.botao:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--folha) 85%, #000); }
+.endereco { color: var(--suave); font-size: 14px; }
+
+.chamada { padding-top: 12vh; }
+.chamada h1 { font-size: clamp(30px, 6vw, 46px); line-height: 1.1; letter-spacing: -0.02em; margin: 8px 0 12px; }
+.chamada p { color: var(--suave); margin: 0; }
+.secao { font-family: system-ui, sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: .12em; color: var(--suave); margin: 8px 0 16px; }
+.cartoes { display: grid; gap: 26px; }
+/* cada notícia é um livro deitado na estante: lombada com frisos dourados à
+   esquerda, capa colorida com moldura e o corte das páginas aparecendo embaixo */
+.cartao { --capa: #3f6b3a; --lombada: #2f5229; position: relative; display: block; color: #fff8e6; text-decoration: none;
+  background: linear-gradient(100deg, rgba(255,255,255,.10), rgba(255,255,255,0) 38%), var(--capa);
+  border-radius: 5px 12px 12px 5px; padding: 20px 22px 22px 58px; transition: translate .25s, box-shadow .25s;
+  box-shadow: 0 5px 0 -1px #f6eed8, 0 6px 0 -1px #d9cfae, 0 10px 0 -2px #f6eed8, 0 11px 0 -2px #d9cfae, 0 26px 40px -26px rgba(40, 35, 10, .55); }
+.cartao::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 36px; border-radius: 5px 0 0 5px;
+  background: linear-gradient(#d4a63c, #d4a63c) 0 16px / 100% 3px no-repeat, linear-gradient(#d4a63c, #d4a63c) 0 24px / 100% 1px no-repeat,
+    linear-gradient(#d4a63c, #d4a63c) 0 calc(100% - 16px) / 100% 3px no-repeat, linear-gradient(#d4a63c, #d4a63c) 0 calc(100% - 24px) / 100% 1px no-repeat,
+    linear-gradient(90deg, rgba(0,0,0,.28), rgba(255,255,255,.10) 45%, rgba(0,0,0,.22)), var(--lombada); }
+.cartao::after { content: ""; position: absolute; inset: 9px 9px 9px 45px; border: 1px solid rgba(212, 166, 60, .55); border-radius: 3px 8px 8px 3px; pointer-events: none; }
+.cartao:nth-child(4n + 2) { --capa: #a8452f; --lombada: #853423; }
+.cartao:nth-child(4n + 3) { --capa: #2f4858; --lombada: #223644; }
+.cartao:nth-child(4n + 4) { --capa: #b98215; --lombada: #96690f; }
+.cartao:hover { translate: 10px 0; box-shadow: 0 5px 0 -1px #f6eed8, 0 6px 0 -1px #d9cfae, 0 10px 0 -2px #f6eed8, 0 11px 0 -2px #d9cfae, 0 32px 46px -26px rgba(40, 35, 10, .6); }
+.cartao time { font: 600 12px system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #f3d98a; }
+.meta { font-family: system-ui, sans-serif; font-size: 13px; color: var(--suave); }
+.cartao h3 { margin: 6px 0 4px; font-size: 22px; line-height: 1.22; }
+.cartao p { margin: 0; color: rgba(255, 248, 230, .84); }
+.ler { position: absolute; right: 24px; top: 20px; font: 600 13px system-ui, sans-serif; color: #f3d98a; opacity: 0; transition: opacity .25s; }
+.cartao:hover .ler { opacity: 1; }
+.vazio { color: var(--suave); }
+
+/* notícia: texto num painel de vidro, legível por cima da árvore */
+.materia { background: var(--vidro); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--linha); border-radius: 18px; padding: 28px clamp(18px, 4vw, 40px) 40px; margin-top: 8px; margin-bottom: 56px; }
+.materia h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.12; margin: 12px 0 6px; letter-spacing: -0.015em; }
+.voltar { font-family: system-ui, sans-serif; font-size: 14px; text-decoration: none; }
+.linha-fina { font-size: 20px; color: var(--suave); border-left: 3px solid var(--ipe); padding-left: 14px; }
+.texto h2 { font-size: 24px; margin-top: 32px; }
+.texto h3 { font-size: 20px; }
+.leitura { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 5; }
+.leitura span { display: block; height: 100%; background: linear-gradient(90deg, var(--ipe), var(--folha)); transform-origin: 0 50%; transform: scaleX(0); }
+
+.rodape { text-align: center; color: var(--suave); font: 13px system-ui, sans-serif; padding: 24px 16px; }
+
+/* estados iniciais só quando os efeitos assumem (liga.js); rede: aparece aos 2,5 s */
+.efeitos [data-hide] { opacity: 0; animation: socorro .01s 2.5s forwards; }
+@keyframes socorro { to { opacity: 1; } }
+
+@media (max-width: 760px) {
+  .hero { min-height: 0; padding: 32px 16px 120px; }
+  .hero-texto { background: var(--vidro); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 18px; padding: 20px; }
+  .sub { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before { animation: none !important; transition: none !important; }
+  .leitura { display: none; }
+}
+
+/* rodapé alinhado com a coluna de texto: não cai em cima das flores do chão */
+@media (min-width: 1100px) { .rodape { text-align: left; padding-left: clamp(32px, 8vw, 140px); } }

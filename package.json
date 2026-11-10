@@ -1,0 +1,14 @@
+{
+  "name": "painel-bastidores",
+  "private": true,
+  "type": "module",
+  "description": "Camada visual (anime.js + three.js) do site e do painel. O PHP não depende disto.",
+  "scripts": {
+    "build": "esbuild frontend/site.js frontend/painel-efeitos.js --bundle --minify --format=esm --target=es2020 --legal-comments=eof --outdir=public/js"
+  },
+  "devDependencies": {
+    "animejs": "4.5.0",
+    "esbuild": "0.28.2",
+    "three": "0.186.0"
+  }
+}

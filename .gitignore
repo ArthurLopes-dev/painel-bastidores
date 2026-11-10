@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+
+# banco e dados gerados em execução
+dados/*
+!dados/.gitkeep
+!dados/.htaccess
+*.sqlite
+*.sqlite-*
+
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+node_modules/

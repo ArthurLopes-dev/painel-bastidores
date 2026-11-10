@@ -1,0 +1,2 @@
+# Banco e sal: nunca servidos pelo Apache, mesmo que esta pasta fique exposta.
+Require all denied

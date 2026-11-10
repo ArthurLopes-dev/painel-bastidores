@@ -1,0 +1,18 @@
+# Rede de proteção para hospedagem compartilhada.
+#
+# O certo é apontar o site para a pasta public/. Mas quando o projeto inteiro
+# é enviado para a raiz (public_html), este arquivo manda todo pedido para
+# dentro de public/: banco, .env, código e testes nunca são servidos.
+
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^public/ - [L]
+  RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# sem mod_rewrite, ao menos os arquivos sensíveis ficam bloqueados
+<FilesMatch "^(\.env.*|.*\.sqlite.*|sal\.txt|console\.php)$">
+  Require all denied
+</FilesMatch>
